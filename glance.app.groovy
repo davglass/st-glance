@@ -26,13 +26,13 @@ definition(
 
 preferences {
     section("Which Windows?") {
-        input "windows", "capability.contactSensor", multiple: true, required: true
+        input "windows", "capability.contactSensor", multiple: true, required: false
     }
     section("Which Doors?") {
-        input "doors", "capability.contactSensor", multiple: true, required: true
+        input "doors", "capability.contactSensor", multiple: true, required: false
     }
     section("Which Locks?") {
-        input "locks", "capability.lock", multiple: true, required: true
+        input "locks", "capability.lock", multiple: true, required: false
     }
     section("Inside Temp.") {
         input "inside", "capability.temperatureMeasurement", title: "Inside Temp Meter", required: false, multiple: true
@@ -44,7 +44,7 @@ preferences {
         input "lights", "capability.switch", title: "Switches", required: false, multiple: true
     }
     section("Energy Meter") {
-        input "energymeter", "capability.EnergyMeter", title: "Energy Meter", required: false, multiple: true
+        input "energymeter", "capability.EnergyMeter", title: "Energy Meter", required: false, multiple: false
     }
     section("Which Thing?") {
         input "thing", "capability.contactSensor", multiple: false, required: true
