@@ -1,5 +1,6 @@
 metadata {
     definition (name: "My Home", namespace: "davglass", author: "Dav Glass") {
+        capability "Sensor"
         command "countWindows", ["number", "number"]
         command "setTemp", ["number"]
         command "setMotion", ["number", "number"]

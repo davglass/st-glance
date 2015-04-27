@@ -47,7 +47,7 @@ preferences {
         input "energymeter", "capability.EnergyMeter", title: "Energy Meter", required: false, multiple: false
     }
     section("Which Thing?") {
-        input "thing", "capability.contactSensor", multiple: false, required: true
+        input "thing", "capability.sensor", multiple: false, required: true
     }
 }
 
