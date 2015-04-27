@@ -63,24 +63,52 @@ def updated() {
 }
 
 def initialize() {
-    subscribe(windows, "contact", handler);
-    subscribe(doors, "contact", doorsHandler);
-    subscribe(locks, "lock", lockHandler);
-    subscribe(inside, "temperature", tempHandler);
-    subscribe(motion, "motion", motionHandler);
-    subscribe(energymeter, "energy", powerHandler);
-    subscribe(lights, "switch", lightsHandler);
+    if (windows) {
+        subscribe(windows, "contact", handler);
+    }
+    if (doors) {
+        subscribe(doors, "contact", doorsHandler);
+    }
+    if (locks) {
+        subscribe(locks, "lock", lockHandler);
+    }
+    if (inside) {
+        subscribe(inside, "temperature", tempHandler);
+    }
+    if (motion) {
+        subscribe(motion, "motion", motionHandler);
+    }
+    if (energymeter) {
+        subscribe(energymeter, "energy", powerHandler);
+    }
+    if (lights) {
+        subscribe(lights, "switch", lightsHandler);
+    }
     subscribe(app, handlerAll);
 }
 
 def handlerAll(evt) {
-    handler();
-    tempHandler();
-    motionHandler();
-    powerHandler();
-    doorsHandler();
-    lockHandler();
-    lightsHandler();
+    if (windows) {
+        handler();
+    }
+    if (inside) {
+        tempHandler();
+    }
+    if (motion) {
+        motionHandler();
+    }
+    if (energymeter) {
+        powerHandler();
+    }
+    if (doors) {
+        doorsHandler();
+    }
+    if (locks) {
+        lockHandler();
+    }
+    if (lights) {
+        lightsHandler();
+    }
 }
 
 def powerHandler(evt) {
@@ -151,7 +179,9 @@ def motionHandler(evt) {
     def inactive = motion.size() - active;
     log.debug "There are ${active} active and ${inactive} inactive motion sensors.."
     thing.setMotion(active, inactive);
-    powerHandler();
+    if (energymeter) {
+        powerHandler();
+    }
 }
 
 def tempHandler(evt) {
