@@ -5,6 +5,9 @@ This is a little hack that I put together to play with SmartDevice types and doi
 
 It gives me a *Whole house view* of my various sensors and readings. Doesn't do much besides count things.
 
+![img_7907](https://cloud.githubusercontent.com/assets/32551/7352870/c18763c4-ecd4-11e4-9829-dbae3cd898c1.PNG)
+
+
 Install Device
 --------------
 
