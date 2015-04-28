@@ -91,24 +91,38 @@ def initialize() {
 def handlerAll(evt) {
     if (windows) {
         windowsHandler();
+    } else {
+        thing.countWindows(0, 0);
     }
     if (inside) {
         tempHandler();
+    } else {
+        thing.setTemp(0);
     }
     if (motion) {
         motionHandler();
+    } else {
+        thing.setMotion(0, 0);
     }
     if (energymeter) {
         powerHandler();
+    } else {
+        thing.setPower("0 Watts");
     }
     if (doors) {
         doorsHandler();
+    } else {
+        thing.setDoors(0, 0);
     }
     if (locks) {
         lockHandler();
+    } else {
+        thing.setLocks(0, 0);
     }
     if (lights) {
         lightsHandler();
+    } else {
+        thing.setLights(0, 0);
     }
 }
 
