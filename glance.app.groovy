@@ -64,7 +64,7 @@ def updated() {
 
 def initialize() {
     if (windows) {
-        subscribe(windows, "contact", handler);
+        subscribe(windows, "contact", windowsHandler);
     }
     if (doors) {
         subscribe(doors, "contact", doorsHandler);
@@ -85,11 +85,12 @@ def initialize() {
         subscribe(lights, "switch", lightsHandler);
     }
     subscribe(app, handlerAll);
+    handlerAll();
 }
 
 def handlerAll(evt) {
     if (windows) {
-        handler();
+        windowsHandler();
     }
     if (inside) {
         tempHandler();
@@ -112,12 +113,12 @@ def handlerAll(evt) {
 }
 
 def powerHandler(evt) {
-    def power = energymeter.latestValue("power").first();
+    def power = energymeter.latestValue("power");
     log.debug "Setting power to: ${power} Watts"
     thing.setPower("${power} Watts");
 }
 
-def handler(evt) {
+def windowsHandler(evt) {
     log.debug "handler called.."
     def opened = 0;
     windows.each {
