@@ -37,6 +37,9 @@ preferences {
     section("Inside Temp.") {
         input "inside", "capability.temperatureMeasurement", title: "Inside Temp Meter", required: false, multiple: true
     }
+    section("Inside Humidity.") {
+        input "humidity", "capability.relativeHumidityMeasurement ", title: "Inside Humidity Meter", required: false, multiple: true
+    }
     section("Motion Sensors") {
         input "motion", "capability.motionSensor", title: "Motion Sensors", required: false, multiple: true
     }
@@ -84,6 +87,9 @@ def initialize() {
     if (lights) {
         subscribe(lights, "switch", lightsHandler);
     }
+    if (humidity) {
+        subscribe(humidity, "humidity", humidityHandler);
+    }
     subscribe(app, handlerAll);
     handlerAll();
 }
@@ -123,6 +129,11 @@ def handlerAll(evt) {
         lightsHandler();
     } else {
         thing.setLights(0, 0);
+    }
+    if (humidity) {
+        humidityHandler();
+    } else {
+        thing.setHumidity(0);
     }
 }
 
@@ -210,4 +221,16 @@ def tempHandler(evt) {
     def average = temp.sum() / temp.size()
     log.debug "Average Inside: ${average}"
     thing.setTemp(average);
+}
+def humidityHandler(evt) {
+    def temp = []
+    inside.each {
+        if (it && it.currentHumidity) {
+            temp.add(it.currentHumidity)
+        }
+    }
+    log.debug "Humidity Inside: ${temp}"
+    def average = temp.sum() / temp.size()
+    log.debug "Average Inside: ${average}"
+    thing.setHumidity(average);
 }
